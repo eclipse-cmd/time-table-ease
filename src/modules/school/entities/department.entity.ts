@@ -1,5 +1,6 @@
-import { Column, CreateDateColumn, DeleteDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 import { Faculty } from './ƒaculty.entity';
+import { Course } from './course.entity';
 
 @Entity()
 export class Department {
@@ -20,4 +21,7 @@ export class Department {
 
   @ManyToOne(() => Faculty, ({ departments }) => departments)
   faculty: Faculty;
+
+  @OneToMany(() => Course, ({ belongsTo }) => belongsTo)
+  coursesOwned: Course[];
 }

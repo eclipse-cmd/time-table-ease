@@ -1,4 +1,4 @@
-import { Column, CreateDateColumn, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, JoinTable, ManyToMany, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 import { Department } from './department.entity';
 
 @Entity()
@@ -7,7 +7,13 @@ export class Course {
   id: number;
 
   @Column({ type: 'varchar', length: 120 })
-  name: string;
+  title: string;
+
+  @Column({ type: 'varchar', length: 120 })
+  code: string;
+
+  @Column()
+  noOfStudents: number;
 
   @Column({ type: 'timestamp' })
   lastTimeAllocated?: Date;
@@ -18,7 +24,10 @@ export class Course {
   @UpdateDateColumn()
   updatedAt: Date;
 
+  @ManyToOne(() => Department, ({ id }) => id)
+  belongsTo: Department;
+
   @ManyToMany(() => Department, { cascade: ['remove'] })
   @JoinTable()
-  departments: Department[];
+  departmentsOffering: Department[];
 }
