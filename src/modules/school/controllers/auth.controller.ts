@@ -26,5 +26,5 @@ export class AuthController {
 
   INSERT INTO public.school_admin(
   fullname, email, password, "schoolId")
-  VALUES ('tableAdmin', 'admin@lautech.edu.ng', '$2b$10$5LivUswL.abLGwiKmPm7Fur4pI7QxfUL6nMpptj9NCeXUmScastjC', '5cf386e5-b468-48af-9905-f2dcb2c497e2');
+  VALUES ('tableAdmin', 'admin@lautech.edu.ng', '$2b$10$5LivUswL.abLGwiKmPm7Fur4pI7QxfUL6nMpptj9NCeXUmScastjC', '278ada48-b4c5-4012-9974-e96002997de9');
 */
