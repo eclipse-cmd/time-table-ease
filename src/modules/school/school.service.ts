@@ -38,7 +38,31 @@ export class SchoolService extends BaseService {
 
   async loginSchoolAdmin({ email, password }: LoginSchoolAdminDto) {
     try {
-      const admin = await this.schoolAdminRepository.findOne({ where: { email: email } });
+      const admin = await this.schoolAdminRepository.findOne({
+        where: { email },
+        relations: ['school'],
+      });
+      if (!admin) throw new NotAcceptableException('Incorrect login credentials given');
+
+      const verify = await verifyHash(password, admin.password);
+
+      if (!verify) throw new NotAcceptableException('Incorrect login credentials given');
+      delete admin.password;
+
+      const token = this.jwtService.sign({ ...admin });
+
+      return { admin, token };
+    } catch (error) {
+      throw this.Error(error);
+    }
+  }
+
+  async findOneSchoolAdmin({ email, password }: LoginSchoolAdminDto) {
+    try {
+      const admin = await this.schoolAdminRepository.findOne({
+        where: { email },
+        relations: ['school'],
+      });
       if (!admin) throw new NotAcceptableException('Incorrect login credentials given');
 
       const verify = await verifyHash(password, admin.password);

@@ -14,7 +14,7 @@ export class School {
   @Column({ type: 'varchar', length: 120, unique: true })
   domainName: string;
 
-  @Column('text')
+  @Column('text', { select: false })
   password: string;
 
   @Column({ nullable: true })

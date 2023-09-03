@@ -14,7 +14,7 @@ export class SchoolController {
   constructor(private readonly schoolService: SchoolService) {}
 
   @Get('admin/auth')
-  async me(@Req() req: AdminAuthRequest, @Res() res: Response) {
-    return SuccessResponse(res, { data: req.admin });
+  async me(@Req() { user }: AdminAuthRequest, @Res() res: Response) {
+    return SuccessResponse(res, { data: user });
   }
 }
